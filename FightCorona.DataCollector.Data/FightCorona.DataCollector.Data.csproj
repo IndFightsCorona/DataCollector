@@ -52,6 +52,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Adapters\CountriesDataAdapter.cs" />
+    <Compile Include="Adapters\DistrictsStatusDataAdapter.cs" />
+    <Compile Include="Adapters\ReaderStatusDataAdapter.cs" />
     <Compile Include="Migrations\202003280823498_OverallStatisticsColumnChange.cs" />
     <Compile Include="Migrations\202003280823498_OverallStatisticsColumnChange.designer.cs">
       <DependentUpon>202003280823498_OverallStatisticsColumnChange.cs</DependentUpon>
@@ -64,8 +66,17 @@
     <Compile Include="Migrations\202003291657117_CountriesStatusTable.designer.cs">
       <DependentUpon>202003291657117_CountriesStatusTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202004031413384_AddingReaderStatusTable.cs" />
+    <Compile Include="Migrations\202004031413384_AddingReaderStatusTable.designer.cs">
+      <DependentUpon>202004031413384_AddingReaderStatusTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004031615579_AddingDistrictStatusTable.cs" />
+    <Compile Include="Migrations\202004031615579_AddingDistrictStatusTable.designer.cs">
+      <DependentUpon>202004031615579_AddingDistrictStatusTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ContactUs.cs" />
+    <Compile Include="Models\DistrictStatus.cs" />
     <Compile Include="Models\CountryStatus.cs" />
     <Compile Include="Models\LastUpdate.cs" />
     <Compile Include="Models\OverallStatistics.cs" />
@@ -89,6 +100,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202003291657117_CountriesStatusTable.resx">
       <DependentUpon>202003291657117_CountriesStatusTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004031413384_AddingReaderStatusTable.resx">
+      <DependentUpon>202004031413384_AddingReaderStatusTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004031615579_AddingDistrictStatusTable.resx">
+      <DependentUpon>202004031615579_AddingDistrictStatusTable.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SeedQuery.sql" />
   </ItemGroup>

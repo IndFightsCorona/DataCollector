@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading;
 using FightCorona.DataCollector.Data;
+using FightCorona.DataCollector.Data.Adapters;
 using FightCorona.DataCollector.Data.Models;
 using FightCorona.DataCollector.Logger;
 using Newtonsoft.Json;
@@ -15,14 +16,21 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using LogType = FightCorona.DataCollector.Logger.LogType;
 
-namespace FightCorona.DataCollector.Business
+namespace FightCorona.DataCollector.Business.Readers
 {
-    public class IndiaDataReader
-
+    public class MohfwDataReader
     {
         private static string loggerName = "IndiaDataRetriever";
+        private static string readerName = "MohfwDataReader";
 
-        public static void UpdateData()
+        private ReaderStatusDataAdapter readerStatusDataAdapter { get; set; }
+
+        public MohfwDataReader()
+        {
+            readerStatusDataAdapter = new ReaderStatusDataAdapter();
+        }
+
+        public void Read()
         {
             try
             {
@@ -30,9 +38,7 @@ namespace FightCorona.DataCollector.Business
                 {
                     try
                     {
-
-                        var lastUpdateInDatabse = context.LastUpdate.Find(1);
-                        Log.WriteEntityLog(loggerName, "lastUpdateInDatabse passed.");
+                        var readerStatus = GetReaderStatus();
 
                         var maxVersionOfOverallStatistics = context.OverallStatistics.Any() ? context.OverallStatistics.Max(s => s.Version) : 0;
                         Log.WriteEntityLog(loggerName, "maxVersionOfOverallStatistics passed. " + maxVersionOfOverallStatistics);
@@ -49,33 +55,38 @@ namespace FightCorona.DataCollector.Business
 
                         Log.WriteEntityLog(loggerName, "latestStatisticsList passed. ");
                         List<Statistics> statisticsList = null;
-                        using (var driver = new ChromeDriver())
+                        ChromeOptions options = new ChromeOptions();
+                        options.AddArgument("--headless");
+                        using (var driver = new ChromeDriver(options))
                         {
                             // Go to the home page
                             driver.Navigate().GoToUrl("https://www.mohfw.gov.in/");
 
-                            DateTime lastUpdatedDate = GetLastUpdatedDate(driver);
-                            Log.WriteEntityLog(loggerName, "lastUpdatedDate passed. " + lastUpdatedDate.ToString());
+                            DateTime lastUpdatedTimeInSource= GetLastUpdatedDate(driver);
+                            Log.WriteEntityLog(loggerName, "lastUpdatedDate passed. " + lastUpdatedTimeInSource.ToString());
 
-                            isLatestData = lastUpdatedDate == lastUpdateInDatabse.LastUpdated ? true : false;
+                            DateTime lastUpdatedTimeInDb;
+                            if (DateTime.TryParse(readerStatus.Version, out lastUpdatedTimeInDb))
+                                isLatestData = (lastUpdatedTimeInSource == lastUpdatedTimeInDb);
+
                             Log.WriteEntityLog(loggerName, "isLatestData passed. " + isLatestData.ToString());
 
                             if (!isLatestData)
                             {
 
-                                DateTime previousDate = lastUpdatedDate.AddDays(-1);
+                                DateTime previousDate = lastUpdatedTimeInSource.AddDays(-1);
                                 var totalCasesPreviousDay = context.OverallStatistics.Where(x => System.Data.Entity.DbFunctions.TruncateTime(x.LastUpdatedTime) == previousDate.Date).FirstOrDefault<OverallStatistics>();
                                 Log.WriteEntityLog(loggerName, "totalCasesPreviousDay passed.");
 
                                 List<String> overallStatisticsData = GetOverAllStatistics(maxVersionOfOverallStatistics, driver);
                                 Log.WriteEntityLog(loggerName, "overallStatisticsData passed.");
 
-                                OverallStatistics overallStatisticsObject = InsertOrUpdateOveAllStatisticsData(maxVersionOfStatistics, overallStatisticsData, lastUpdatedDate, overallStatistics, totalCasesPreviousDay);
+                                OverallStatistics overallStatisticsObject = InsertOrUpdateOveAllStatisticsData(maxVersionOfStatistics, overallStatisticsData, lastUpdatedTimeInSource, overallStatistics, totalCasesPreviousDay);
                                 Log.WriteEntityLog(loggerName, "overallStatisticsObject passed.");
 
                                 List<string> tableHeaderValues = GetTableHeaderValues(driver);
                                 List<dynamic> tableRowData = GetTableRowData(driver, tableHeaderValues);
-                                statisticsList = InsertOrUpdateStatisticsData(maxVersionOfStatistics, tableHeaderValues, tableRowData, lastUpdatedDate, latestStatisticsList);
+                                statisticsList = InsertOrUpdateStatisticsData(maxVersionOfStatistics, tableHeaderValues, tableRowData, lastUpdatedTimeInSource, latestStatisticsList);
                                 Log.WriteEntityLog(loggerName, "InsertOrUpdateStatisticsData passed.");
 
                                 if (statisticsList.Any())
@@ -83,10 +94,9 @@ namespace FightCorona.DataCollector.Business
                                     context.Statistics.AddRange(statisticsList);
                                 }
 
-                                InsertOrUpdateLastUpdateData(lastUpdatedDate, lastUpdateInDatabse);
+                                InsertOrUpdateLastUpdateData(lastUpdatedTimeInSource, readerStatus);
                                 Log.WriteEntityLog(loggerName, "InsertOrUpdateLastUpdateData passed.");
 
-                                //context.LastUpdate.Add(lastUpdate);
                                 if (overallStatisticsObject != null)
                                 {
                                     context.OverallStatistics.Add(overallStatisticsObject);
@@ -127,9 +137,19 @@ namespace FightCorona.DataCollector.Business
                 if (exception.Message != null)
                     Log.WriteEntityLog(loggerName, exception.Message.ToString() + exception.InnerException.ToString(), LogType.Error);
             }
-
-
         }
+
+        #region Private Methods
+
+        private ReaderStatus GetReaderStatus()
+        {
+           var readerStatus = readerStatusDataAdapter.Get(readerName);
+            if (readerStatus == null)
+                readerStatus = readerStatusDataAdapter.Add(new ReaderStatus { ReaderName = readerName, Version = DateTime.MinValue.ToString() });
+            return readerStatus;
+        }
+
+        #endregion Private Methods
 
         private static void ResetCache()
         {
@@ -151,9 +171,9 @@ namespace FightCorona.DataCollector.Business
             }
         }
 
-        private static void InsertOrUpdateLastUpdateData(DateTime lastUpdatedDate, LastUpdate lastUpdate)
+        private static void InsertOrUpdateLastUpdateData(DateTime lastUpdatedDate, ReaderStatus readerStatus)
         {
-            lastUpdate.LastUpdated = lastUpdatedDate;
+            readerStatus.Version = lastUpdatedDate.ToString();
         }
 
         private static List<Statistics> InsertOrUpdateStatisticsData(int version, List<string> tableHeaderValues, List<dynamic> tableRowData, DateTime lastUpdatedDate, List<Statistics> latestStatisticsList)

@@ -1,17 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace FightCorona.DataCollector.Data.Models
 {
-    public class LastUpdate
+    public class ReaderStatus
     {
         [Key]
         public int Id { get; set; }
 
         [Required]
-        public DateTime LastUpdated { get; set; }
+        public string ReaderName { get; set; }
 
+        [Required]
+        public string Version { get; set; }
     }
 }

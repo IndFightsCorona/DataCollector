@@ -8,7 +8,7 @@ using FightCorona.DataCollector.Data.Models;
 using FightCorona.DataCollector.Logger;
 using Newtonsoft.Json;
 
-namespace FightCorona.DataCollector.Business
+namespace FightCorona.DataCollector.Business.Readers
 {
     public static class WorldDataReader
     {

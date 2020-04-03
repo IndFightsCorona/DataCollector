@@ -1,13 +1,15 @@
 ﻿using System;
 using System.IO;
 using System.ServiceProcess;
+using System.Threading.Tasks;
 using System.Timers;
-using FightCorona.DataCollector.Business;
+using FightCorona.DataCollector.Business.Readers;
 
 namespace FightCorona.DataCollector.Service
 {
     public partial class DataCollectorService : ServiceBase
     {
+        object readLock = new object();
         Timer timer = new Timer();
         public DataCollectorService()
         {
@@ -31,17 +33,23 @@ namespace FightCorona.DataCollector.Service
 
         private void DataCollectorEvent(object source, ElapsedEventArgs e)
         {
-            try
+            WriteLog(String.Format("Data Collector Service - {0} started", e.SignalTime));
+            Read(e.SignalTime);
+            WriteLog(String.Format("Data Collector Service - {0} completed", e.SignalTime));
+        }
+
+        private void Read(DateTime signalTime)
+        {
+            lock(readLock)
             {
-                WriteLog(String.Format("Data Collector Service - {0} started successfully", e.SignalTime));
-                IndiaDataReader.UpdateData();
-                //TODO: Commented until last version comparison implemented
-                //WorldDataReader.UpdateCountriesCurrentData().Wait();
-                WriteLog(String.Format("Data Collector Service - {0} completed successfully", e.SignalTime));
-            }
-            catch(Exception ex)
-            {
-                WriteLog(String.Format("Data Collector Service - {0} did not run successfully; Error details: {1}", e.SignalTime, ex.Message));
+                try
+                {
+                    Parallel.Invoke(() => new MohfwDataReader().Read(), () => new StateDataReader().Read());
+                }
+                catch (Exception ex)
+                {
+                    WriteLog(String.Format("Data Collector Service - {0} did not run successfully; Error details: {1}", signalTime, ex.Message));
+                }
             }
         }
 

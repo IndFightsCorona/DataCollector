@@ -14,10 +14,12 @@ namespace FightCorona.DataCollector.Data
 
         public DbSet<OverallStatistics> OverallStatistics { get; set; }
 
-        public DbSet<LastUpdate> LastUpdate { get; set; }
+        public DbSet<ReaderStatus> ReaderStatus { get; set; }
 
         public DbSet<ContactUs> ContactUs { get; set; }
 
         public DbSet<CountryStatus> CountriesStatus { get; set; }
+
+        public DbSet<DistrictStatus> DistrictsStatus { get; set; }
     }
 }
