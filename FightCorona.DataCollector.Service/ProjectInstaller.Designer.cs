@@ -1,4 +1,4 @@
-﻿namespace WebScrapingService
+﻿namespace FightCorona.DataCollector.Service
 {
     partial class ProjectInstaller
     {

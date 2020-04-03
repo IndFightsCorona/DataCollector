@@ -9,7 +9,7 @@ namespace FightCorona.DataCollector.Business.Tests
         [TestMethod]
         public async Task TestMethod1()
         {
-            await new WorldDataReader().UpdateCountriesCurrentData();
+            await WorldDataReader.UpdateCountriesCurrentData();
         }
     }
 }

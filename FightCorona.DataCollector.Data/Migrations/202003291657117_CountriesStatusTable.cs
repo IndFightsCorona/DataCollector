@@ -1,4 +1,4 @@
-﻿namespace WebScrapingService.Migrations
+﻿namespace FightCorona.DataCollector.Data.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;

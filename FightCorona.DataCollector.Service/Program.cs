@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.ServiceProcess;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ServiceProcess;
 
-namespace WebScrapingService
+namespace FightCorona.DataCollector.Service
 {
     static class Program
     {
@@ -17,7 +12,7 @@ namespace WebScrapingService
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[]
             {
-                new Service1()
+                new DataCollectorService()
             };
             ServiceBase.Run(ServicesToRun);
         }
