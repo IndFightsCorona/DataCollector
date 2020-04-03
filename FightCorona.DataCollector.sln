@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FightCorona.DataCollector", "FightCorona.DataCollector\FightCorona.DataCollector.csproj", "{328A71B5-623F-4976-89B2-633B381EF15E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FightCorona.DataCollector.Service", "FightCorona.DataCollector.Service\FightCorona.DataCollector.Service.csproj", "{328A71B5-623F-4976-89B2-633B381EF15E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FightCorona.DataCollector.Data", "FightCorona.DataCollector.Data\FightCorona.DataCollector.Data.csproj", "{65E1B932-782E-4084-9FAC-AE3B6E08BC0A}"
 EndProject

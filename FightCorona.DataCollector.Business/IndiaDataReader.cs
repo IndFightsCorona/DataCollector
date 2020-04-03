@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity.Core;
 using System.Globalization;
 using System.Linq;
@@ -14,18 +15,17 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using LogType = FightCorona.DataCollector.Logger.LogType;
 
-namespace WebScrapingService
+namespace FightCorona.DataCollector.Business
 {
-    public class StatisticsInformation
+    public class IndiaDataReader
 
     {
         private static string loggerName = "IndiaDataRetriever";
 
-        public static void GetStatisticsInformation()
+        public static void UpdateData()
         {
             try
             {
-
                 using (var context = new StatisticsContext())
                 {
                     try
@@ -164,7 +164,7 @@ namespace WebScrapingService
             DateTime createdDate = latestStatisticsList.Any() ? latestStatisticsList.FirstOrDefault().CreatedDate.Date : new DateTime();
 
             bool update = createdDate == lastUpdatedDate.Date ? true : false;
-            var totalTableRowData = int.Parse(System.Configuration.ConfigurationManager.AppSettings["noOfStates"]);
+            var totalTableRowData = int.Parse(ConfigurationManager.AppSettings["noOfStates"]);
             tableRowData = tableRowData.Take(totalTableRowData).ToList();
             foreach (var tr in tableRowData)
             {
@@ -203,7 +203,6 @@ namespace WebScrapingService
             }
             return statisticsDataList.ToList();
         }
-
 
         private static OverallStatistics InsertOrUpdateOveAllStatisticsData(int maxVersionOfStatistics, List<string> overallStatisticsData, DateTime lastUpdatedDate, OverallStatistics overallStatistics, OverallStatistics totalCasesPreviousDay)
         {
@@ -332,7 +331,6 @@ namespace WebScrapingService
             return overAllDataValues;
 
             #endregion
-
         }
 
         private static DateTime GetLastUpdatedDate(ChromeDriver driver)
