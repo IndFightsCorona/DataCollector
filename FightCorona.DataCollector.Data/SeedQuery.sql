@@ -724,11 +724,13 @@ INSERT [dbo].[CountryStatus] ([Id], [Location], [Confirmed], [Deaths], [Recovere
 
 SET IDENTITY_INSERT [dbo].[CountryStatus] OFF
 
-SET IDENTITY_INSERT [dbo].[LastUpdates] ON 
+SET IDENTITY_INSERT [dbo].[ReaderStatus] ON 
 
-INSERT [dbo].[LastUpdates] ([Id], [LastUpdated]) VALUES (1, CAST(N'2020-04-03T09:00:00.000' AS DateTime))
+INSERT [dbo].[ReaderStatus] ([Id], [ReaderName], [Version]) VALUES (1, N'TNDataReader', N'0')
 
-SET IDENTITY_INSERT [dbo].[LastUpdates] OFF
+INSERT [dbo].[ReaderStatus] ([Id], [ReaderName], [Version]) VALUES (2, N'MohfwDataReader', N'4/3/2020 06:00:00 PM')
+
+SET IDENTITY_INSERT [dbo].[ReaderStatus] OFF
 
 SET IDENTITY_INSERT [dbo].[OverallStatistics] ON 
 
@@ -800,7 +802,7 @@ INSERT [dbo].[OverallStatistics] ([Id], [Passengers_screened_at_airport], [Activ
 
 INSERT [dbo].[OverallStatistics] ([Id], [Passengers_screened_at_airport], [Active_COVID_2019_cases], [Cured_discharged_cases], [Death_cases], [Migrated_COVID19_Patient], [TotalCasesOverDays], [DeathsOverDays], [NewCasesOverDays], [Version], [LastUpdatedTime]) VALUES (37, 0, 1935, 155, 53, 1, 2144, 53, 310, 14, CAST(N'2020-04-02T18:00:00.000' AS DateTime))
 
-INSERT [dbo].[OverallStatistics] ([Id], [Passengers_screened_at_airport], [Active_COVID_2019_cases], [Cured_discharged_cases], [Death_cases], [Migrated_COVID19_Patient], [TotalCasesOverDays], [DeathsOverDays], [NewCasesOverDays], [Version], [LastUpdatedTime]) VALUES (38, 0, 2088, 156, 56, 1, 2301, 56, 157, 15, CAST(N'2020-04-03T09:00:00.000' AS DateTime))
+INSERT [dbo].[OverallStatistics] ([Id], [Passengers_screened_at_airport], [Active_COVID_2019_cases], [Cured_discharged_cases], [Death_cases], [Migrated_COVID19_Patient], [TotalCasesOverDays], [DeathsOverDays], [NewCasesOverDays], [Version], [LastUpdatedTime]) VALUES (38, 0, 2322, 162, 62, 1, 2547, 62, 403, 15, CAST(N'2020-04-03T18:00:00.000' AS DateTime))
 
 SET IDENTITY_INSERT [dbo].[OverallStatistics] OFF
 
@@ -1520,65 +1522,66 @@ INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cas
 
 INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (383, 29, N'West Bengal', 53, 0, 6, 3, CAST(N'2020-04-02T18:00:00.000' AS DateTime), 14, N'WESTBENGAL')
 
-INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (384, 1, N'Andhra Pradesh', 132, 0, 1, 1, CAST(N'2020-04-03T09:00:00.000' AS DateTime), 15, N'ANDHRAPRADESH')
+INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (384, 1, N'Andhra Pradesh', 132, 0, 1, 1, CAST(N'2020-04-03T18:00:00.000' AS DateTime), 15, N'ANDHRAPRADESH')
 
-INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (385, 2, N'Andaman and Nicobar Islands', 10, 0, 0, 0, CAST(N'2020-04-03T09:00:00.000' AS DateTime), 15, N'ANDAMANANDNICOBARISLANDS')
+INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (385, 2, N'Andaman and Nicobar Islands', 10, 0, 0, 0, CAST(N'2020-04-03T18:00:00.000' AS DateTime), 15, N'ANDAMANANDNICOBARISLANDS')
 
-INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (386, 3, N'Arunachal Pradesh', 1, 0, 0, 0, CAST(N'2020-04-03T09:00:00.000' AS DateTime), 15, N'ARUNACHALPRADESH')
+INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (386, 3, N'Arunachal Pradesh', 1, 0, 0, 0, CAST(N'2020-04-03T18:00:00.000' AS DateTime), 15, N'ARUNACHALPRADESH')
 
-INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (387, 4, N'Assam', 16, 0, 0, 0, CAST(N'2020-04-03T09:00:00.000' AS DateTime), 15, N'ASSAM')
+INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (387, 4, N'Assam', 16, 0, 0, 0, CAST(N'2020-04-03T18:00:00.000' AS DateTime), 15, N'ASSAM')
 
-INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (388, 5, N'Bihar', 24, 0, 0, 1, CAST(N'2020-04-03T09:00:00.000' AS DateTime), 15, N'BIHAR')
+INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (388, 5, N'Bihar', 29, 0, 0, 1, CAST(N'2020-04-03T18:00:00.000' AS DateTime), 15, N'BIHAR')
 
-INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (389, 6, N'Chandigarh', 18, 0, 0, 0, CAST(N'2020-04-03T09:00:00.000' AS DateTime), 15, N'CHANDIGARH')
+INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (389, 6, N'Chandigarh', 18, 0, 0, 0, CAST(N'2020-04-03T18:00:00.000' AS DateTime), 15, N'CHANDIGARH')
 
-INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (390, 7, N'Chhattisgarh', 9, 0, 2, 0, CAST(N'2020-04-03T09:00:00.000' AS DateTime), 15, N'CHHATTISGARH')
+INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (390, 7, N'Chhattisgarh', 9, 0, 3, 0, CAST(N'2020-04-03T18:00:00.000' AS DateTime), 15, N'CHHATTISGARH')
 
-INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (391, 8, N'Delhi', 219, 0, 8, 4, CAST(N'2020-04-03T09:00:00.000' AS DateTime), 15, N'DELHI')
+INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (391, 8, N'Delhi', 219, 0, 8, 4, CAST(N'2020-04-03T18:00:00.000' AS DateTime), 15, N'DELHI')
 
-INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (392, 9, N'Goa', 6, 0, 0, 0, CAST(N'2020-04-03T09:00:00.000' AS DateTime), 15, N'GOA')
+INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (392, 9, N'Goa', 6, 0, 0, 0, CAST(N'2020-04-03T18:00:00.000' AS DateTime), 15, N'GOA')
 
-INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (393, 10, N'Gujarat', 87, 0, 8, 7, CAST(N'2020-04-03T09:00:00.000' AS DateTime), 15, N'GUJARAT')
+INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (393, 10, N'Gujarat', 95, 0, 10, 8, CAST(N'2020-04-03T18:00:00.000' AS DateTime), 15, N'GUJARAT')
 
-INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (394, 11, N'Haryana', 43, 0, 21, 0, CAST(N'2020-04-03T09:00:00.000' AS DateTime), 15, N'HARYANA')
+INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (394, 11, N'Haryana', 49, 0, 24, 0, CAST(N'2020-04-03T18:00:00.000' AS DateTime), 15, N'HARYANA')
 
-INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (395, 12, N'Himachal Pradesh', 6, 0, 1, 1, CAST(N'2020-04-03T09:00:00.000' AS DateTime), 15, N'HIMACHALPRADESH')
+INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (395, 12, N'Himachal Pradesh', 6, 0, 1, 1, CAST(N'2020-04-03T18:00:00.000' AS DateTime), 15, N'HIMACHALPRADESH')
 
-INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (396, 13, N'Jammu and Kashmir', 70, 0, 3, 2, CAST(N'2020-04-03T09:00:00.000' AS DateTime), 15, N'JAMMUANDKASHMIR')
+INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (396, 13, N'Jammu and Kashmir', 75, 0, 3, 2, CAST(N'2020-04-03T18:00:00.000' AS DateTime), 15, N'JAMMUANDKASHMIR')
 
-INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (397, 14, N'Jharkhand', 2, 0, 0, 0, CAST(N'2020-04-03T09:00:00.000' AS DateTime), 15, N'JHARKHAND')
+INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (397, 14, N'Jharkhand', 2, 0, 0, 0, CAST(N'2020-04-03T18:00:00.000' AS DateTime), 15, N'JHARKHAND')
 
-INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (398, 15, N'Karnataka', 124, 0, 10, 3, CAST(N'2020-04-03T09:00:00.000' AS DateTime), 15, N'KARNATAKA')
+INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (398, 15, N'Karnataka', 124, 0, 10, 3, CAST(N'2020-04-03T18:00:00.000' AS DateTime), 15, N'KARNATAKA')
 
-INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (399, 16, N'Kerala', 286, 0, 27, 2, CAST(N'2020-04-03T09:00:00.000' AS DateTime), 15, N'KERALA')
+INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (399, 16, N'Kerala', 286, 0, 27, 2, CAST(N'2020-04-03T18:00:00.000' AS DateTime), 15, N'KERALA')
 
-INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (400, 17, N'Ladakh', 14, 0, 3, 0, CAST(N'2020-04-03T09:00:00.000' AS DateTime), 15, N'LADAKH')
+INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (400, 17, N'Ladakh', 14, 0, 3, 0, CAST(N'2020-04-03T18:00:00.000' AS DateTime), 15, N'LADAKH')
 
-INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (401, 18, N'Madhya Pradesh', 99, 0, 0, 6, CAST(N'2020-04-03T09:00:00.000' AS DateTime), 15, N'MADHYAPRADESH')
+INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (401, 18, N'Madhya Pradesh', 104, 0, 0, 6, CAST(N'2020-04-03T18:00:00.000' AS DateTime), 15, N'MADHYAPRADESH')
 
-INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (402, 19, N'Maharashtra', 335, 0, 42, 16, CAST(N'2020-04-03T09:00:00.000' AS DateTime), 15, N'MAHARASHTRA')
+INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (402, 19, N'Maharashtra', 335, 0, 42, 16, CAST(N'2020-04-03T18:00:00.000' AS DateTime), 15, N'MAHARASHTRA')
 
-INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (403, 20, N'Manipur', 2, 0, 0, 0, CAST(N'2020-04-03T09:00:00.000' AS DateTime), 15, N'MANIPUR')
+INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (403, 20, N'Manipur', 2, 0, 0, 0, CAST(N'2020-04-03T18:00:00.000' AS DateTime), 15, N'MANIPUR')
 
-INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (404, 21, N'Mizoram', 1, 0, 0, 0, CAST(N'2020-04-03T09:00:00.000' AS DateTime), 15, N'MIZORAM')
+INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (404, 21, N'Mizoram', 1, 0, 0, 0, CAST(N'2020-04-03T18:00:00.000' AS DateTime), 15, N'MIZORAM')
 
-INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (405, 22, N'Odisha', 5, 0, 0, 0, CAST(N'2020-04-03T09:00:00.000' AS DateTime), 15, N'ODISHA')
+INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (405, 22, N'Odisha', 5, 0, 0, 0, CAST(N'2020-04-03T18:00:00.000' AS DateTime), 15, N'ODISHA')
 
-INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (406, 23, N'Puducherry', 3, 0, 1, 0, CAST(N'2020-04-03T09:00:00.000' AS DateTime), 15, N'PUDUCHERRY')
+INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (406, 23, N'Puducherry', 5, 0, 1, 0, CAST(N'2020-04-03T18:00:00.000' AS DateTime), 15, N'PUDUCHERRY')
 
-INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (407, 24, N'Punjab', 46, 0, 1, 4, CAST(N'2020-04-03T09:00:00.000' AS DateTime), 15, N'PUNJAB')
+INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (407, 24, N'Punjab', 48, 0, 1, 5, CAST(N'2020-04-03T18:00:00.000' AS DateTime), 15, N'PUNJAB')
 
-INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (408, 25, N'Rajasthan', 133, 0, 3, 0, CAST(N'2020-04-03T09:00:00.000' AS DateTime), 15, N'RAJASTHAN')
+INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (408, 25, N'Rajasthan', 167, 0, 3, 0, CAST(N'2020-04-03T18:00:00.000' AS DateTime), 15, N'RAJASTHAN')
 
-INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (409, 26, N'Tamil Nadu', 309, 0, 6, 1, CAST(N'2020-04-03T09:00:00.000' AS DateTime), 15, N'TAMILNADU')
+INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (409, 26, N'Tamil Nadu', 309, 0, 6, 1, CAST(N'2020-04-03T18:00:00.000' AS DateTime), 15, N'TAMILNADU')
 
-INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (410, 27, N'Telangana', 107, 0, 1, 3, CAST(N'2020-04-03T09:00:00.000' AS DateTime), 15, N'TELANGANA')
+INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (410, 27, N'Telangana', 158, 0, 1, 7, CAST(N'2020-04-03T18:00:00.000' AS DateTime), 15, N'TELANGANA')
 
-INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (411, 28, N'Uttarakhand', 10, 0, 2, 0, CAST(N'2020-04-03T09:00:00.000' AS DateTime), 15, N'UTTARAKHAND')
+INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (411, 28, N'Uttarakhand', 10, 0, 2, 0, CAST(N'2020-04-03T18:00:00.000' AS DateTime), 15, N'UTTARAKHAND')
 
-INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (412, 28, N'Uttar Pradesh', 113, 0, 14, 2, CAST(N'2020-04-03T09:00:00.000' AS DateTime), 15, N'UTTARPRADESH')
+INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (412, 28, N'Uttar Pradesh', 172, 0, 14, 2, CAST(N'2020-04-03T18:00:00.000' AS DateTime), 15, N'UTTARPRADESH')
 
-INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (413, 29, N'West Bengal', 53, 0, 3, 3, CAST(N'2020-04-03T09:00:00.000' AS DateTime), 15, N'WESTBENGAL')
+INSERT [dbo].[Statistics] ([Id], [SNo], [Name_of_State_UT], [Total_Confirmed_cases_Indian_National], [Total_Confirmed_cases_Foreign_National], [Cured_Discharged_Migrated], [Death], [CreatedDate], [Version], [State_UT_Code]) VALUES (413, 29, N'West Bengal', 63, 0, 3, 3, CAST(N'2020-04-03T18:00:00.000' AS DateTime), 15, N'WESTBENGAL')
+
 
 SET IDENTITY_INSERT [dbo].[Statistics] OFF
 
