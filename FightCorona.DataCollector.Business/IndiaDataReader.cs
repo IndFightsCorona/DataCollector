@@ -109,7 +109,7 @@ namespace FightCorona.DataCollector.Business
 
                         }
                     }
-                    catch (EntityException exception)
+                    catch (Exception exception)
                     {
 
                         if (exception.Message != null)
@@ -170,8 +170,9 @@ namespace FightCorona.DataCollector.Business
             {
 
                 var latestStatistics = latestStatisticsList.Where(x => x.Name_of_State_UT == tr[tableHeaderValues[1]]).FirstOrDefault();
-                if (!update)
+                if (update == false || latestStatistics == null)
                 {
+                    var nextVersion = update == true && latestStatistics == null ? version : version + 1;
                     statisticsDataList.Add(new Statistics()
                     {
                         SNo = int.Parse(tr[tableHeaderValues[0]]),
@@ -182,7 +183,7 @@ namespace FightCorona.DataCollector.Business
                         Cured_Discharged_Migrated = int.Parse(tr[tableHeaderValues[3]]),
                         Death = int.Parse(tr[tableHeaderValues[4]].Replace("#", "")),
                         CreatedDate = lastUpdatedDate,
-                        Version = version + 1,
+                        Version = nextVersion,
                         Id = 0
 
                     });
