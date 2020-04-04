@@ -171,9 +171,9 @@ namespace FightCorona.DataCollector.Business.Readers
             }
         }
 
-        private static void InsertOrUpdateLastUpdateData(DateTime lastUpdatedDate, ReaderStatus readerStatus)
+        private void InsertOrUpdateLastUpdateData(DateTime lastUpdatedDate, ReaderStatus readerStatus)
         {
-            readerStatus.Version = lastUpdatedDate.ToString();
+            readerStatusDataAdapter.Update(readerStatus.ReaderName, lastUpdatedDate.ToString());
         }
 
         private static List<Statistics> InsertOrUpdateStatisticsData(int version, List<string> tableHeaderValues, List<dynamic> tableRowData, DateTime lastUpdatedDate, List<Statistics> latestStatisticsList)
@@ -318,7 +318,8 @@ namespace FightCorona.DataCollector.Business.Readers
         {
 
             #region TableHeader
-            var tableHeaders = driver.FindElements(By.XPath("//div[@class='content newtab']/div/table/thead/tr/th/strong"));
+            //var tableHeaders = driver.FindElements(By.XPath("//div[@class='content newtab']/div/table/thead/tr/th/strong"));
+            var tableHeaders = driver.FindElements(By.XPath("//section[@id='state-data']//div/table/thead/tr/th/strong"));
 
             Thread.Sleep(8000);
             List<String> tableHeaderValues = new List<String>();
