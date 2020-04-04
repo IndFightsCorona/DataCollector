@@ -127,7 +127,7 @@ namespace FightCorona.DataCollector.Business.Readers
                             // Output unexpected InnerExceptions.
                             Log.WriteEntityLog(loggerName, exception.Message.ToString());
                         }
-                        exception.InnerException.ToString();
+                        Log.WriteEntityLog(loggerName, exception.InnerException.ToString());
 
                     }
                 }
@@ -199,7 +199,7 @@ namespace FightCorona.DataCollector.Business.Readers
                         Name_of_State_UT = tr[tableHeaderValues[1]],
                         State_UT_Code = tr[tableHeaderValues[1]].Replace(" ", "").ToUpper(),
                         Total_Confirmed_cases_Indian_National = int.Parse(tr[tableHeaderValues[2]]),
-                        Total_Confirmed_cases_Foreign_National = latestStatistics.Total_Confirmed_cases_Foreign_National,// int.Parse(tr[tableHeaderValues[3]]),
+                        Total_Confirmed_cases_Foreign_National = 0,// int.Parse(tr[tableHeaderValues[3]]),
                         Cured_Discharged_Migrated = int.Parse(tr[tableHeaderValues[3]]),
                         Death = int.Parse(tr[tableHeaderValues[4]].Replace("#", "")),
                         CreatedDate = lastUpdatedDate,
@@ -214,7 +214,7 @@ namespace FightCorona.DataCollector.Business.Readers
                     latestStatistics.Name_of_State_UT = tr[tableHeaderValues[1]];
                     latestStatistics.State_UT_Code = tr[tableHeaderValues[1]].Replace(" ", "").ToUpper();
                     latestStatistics.Total_Confirmed_cases_Indian_National = int.Parse(tr[tableHeaderValues[2]]);
-                    latestStatistics.Total_Confirmed_cases_Foreign_National = latestStatistics.Total_Confirmed_cases_Foreign_National;//int.Parse(tr[tableHeaderValues[3]]);
+                    latestStatistics.Total_Confirmed_cases_Foreign_National = 0;//int.Parse(tr[tableHeaderValues[3]]);
                     latestStatistics.Cured_Discharged_Migrated = int.Parse(tr[tableHeaderValues[3]]);
                     latestStatistics.Death = int.Parse(tr[tableHeaderValues[4]].Replace("#", ""));
                     latestStatistics.CreatedDate = lastUpdatedDate;
@@ -233,11 +233,11 @@ namespace FightCorona.DataCollector.Business.Readers
             DateTime createdDate = overallStatistics != null ? overallStatistics.LastUpdatedTime.Date : new DateTime();
 
             bool update = createdDate == lastUpdatedDate.Date ? true : false;
-            int overallStatisticsData0 = int.Parse(overallStatisticsData[0].Replace(",", ""));
-            int overallStatisticsData1 = int.Parse(overallStatisticsData[1]);
-            int overallStatisticsData2 = int.Parse(overallStatisticsData[2]);
-            int overallStatisticsData3 = int.Parse(overallStatisticsData[3].Replace("#", ""));
-            int overallStatisticsData4 = int.Parse(overallStatisticsData[4]);
+            int overallStatisticsData0 = 0;
+            int overallStatisticsData1 = int.Parse(overallStatisticsData[0].Replace(",", ""));
+            int overallStatisticsData2 = int.Parse(overallStatisticsData[1].Replace(",", ""));
+            int overallStatisticsData3 = int.Parse(overallStatisticsData[2].Replace("#", ""));
+            int overallStatisticsData4 = int.Parse(overallStatisticsData[3]);
 
 
             int totalCasesToday = overallStatisticsData1 + overallStatisticsData2 + overallStatisticsData3 + overallStatisticsData4;
@@ -283,7 +283,8 @@ namespace FightCorona.DataCollector.Business.Readers
         {
 
             #region tableRows
-            var tableRows = driver.FindElements(By.XPath("//div[@class='content newtab']/div/table/tbody/tr"));
+            //var tableRows = driver.FindElements(By.XPath("//div[@class='content newtab']/div/table/tbody/tr"));
+            var tableRows = driver.FindElements(By.XPath("//section[@id='state-data']//div/table/tbody/tr"));
 
             var tableRowData = new List<dynamic>();
 
@@ -324,7 +325,7 @@ namespace FightCorona.DataCollector.Business.Readers
 
             foreach (IWebElement th in tableHeaders)
             {
-                tableHeaderValues.Add(th.GetAttribute("innerHTML"));
+                tableHeaderValues.Add(th.GetAttribute("innerText"));
                 //Console.WriteLine("" + th.GetAttribute("innerHTML"));
             }
 
@@ -336,7 +337,8 @@ namespace FightCorona.DataCollector.Business.Readers
         {
             #region Overall data
 
-            var overAllData = driver.FindElements(By.XPath("//div[@class='contribution col-sm-9']/div[@class='information_block']//div[@class='information_row']/div[@class='iblock']/div[@class='iblock_text']/span"));
+            // var overAllData = driver.FindElements(By.XPath("//div[@class='contribution col-sm-9']/div[@class='information_block']//div[@class='information_row']/div[@class='iblock']/div[@class='iblock_text']/span"));
+            var overAllData = driver.FindElements(By.XPath("//div[@class='site-stats-count']/ul/li/strong"));
 
             // var overAllData = overAllData_iblocks.
             Thread.Sleep(8000);
@@ -345,7 +347,7 @@ namespace FightCorona.DataCollector.Business.Readers
 
             foreach (IWebElement data in overAllData)
             {
-                overAllDataValues.Add(data.GetAttribute("innerHTML"));
+                overAllDataValues.Add(data.GetAttribute("innerText"));
                 //Console.WriteLine("" + data.GetAttribute("innerHTML"));
             }
 
@@ -358,12 +360,12 @@ namespace FightCorona.DataCollector.Business.Readers
         {
             #region Lastupdated
 
-            var lastUpdatedInfo = driver.FindElements(By.XPath("//div[@class='content newtab']/p"));
+            var lastUpdatedInfo = driver.FindElements(By.XPath("//div[@class='status-update']/h2/span"));
 
             string stringWithDate = lastUpdatedInfo[0].GetAttribute("innerText");//"(*including foreign nationals, as on 22.03.2020 at 09:45 AM)";
-            Match matchDate = Regex.Match(stringWithDate, @"\d{2}.\d{2}.\d{4}");
-            Match matchtime = Regex.Match(stringWithDate, @"\d{2}:\d{2} ([AaPp][Mm])");
-            var dateString = matchDate.Value.Replace('.', '/') + " " + matchtime.Value;
+            //Match matchDate = Regex.Match(stringWithDate, @"\d{2}.\d{2}.\d{4}");
+            //Match matchtime = Regex.Match(stringWithDate, @"\d{2}:\d{2} ([AaPp][Mm])");
+            var dateString = stringWithDate.Replace(" ", "").Replace("ason:", "").Replace("GMT+5:30", "");
             DateTime lastUpdatedDate = new DateTime();
 
 
